@@ -3,6 +3,9 @@
 #include "GlobalV.h"
 #include "DesFunc.h"
 #include <stdio.h>
+
+u64 PTableLookUp[8][256]={0};
+
 void genPTableLookUp(){
 	u64 x;
 	for(int i=0;i<8;i++){

@@ -8,6 +8,10 @@
 #include "Search.h"
 #include "GlobalV.h"
 #include "Tables.h"
+
+#define TN 1000000
+
+
 u64 genRandom64(){
 	u64 x;
 	srand((unsigned long)time(NULL));
@@ -41,9 +45,9 @@ void printUnP(){
 int main(){
 	genDiffTable();
 	genPTableLookUp();
-
+	clock_t start,end;
 	//printDiffTable();
-	printPTableLookUp(7);
+	//printPTableLookUp(7);
 	u64 x;
 	u8 sb[16];
 	bool bit[64];
@@ -62,5 +66,16 @@ int main(){
 	print64(x);
 	x=permutationTL(x);
 	print64(x);
+	start=clock();
+	for(int i=0;i<TN;i++){
+		x=permutationTL(x);
+	}
+	end=clock();
+	printf("²é±ítime=%f\n",(double)(end-start)/CLK_TCK);
+	for(int i=0;i<TN;i++){
+		x=permutation(x);
+	}
+	end=clock();
+	printf("ÆÕÍ¨time=%f\n",(double)(end-start)/CLK_TCK);
 	system("pause");
 }

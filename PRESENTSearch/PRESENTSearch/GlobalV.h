@@ -1,4 +1,6 @@
 #pragma once
 #include "Types.h"
-static u64 PTableLookUp[8][256]={0};
-static int DDT_int[16][16]={0};
+#include "LookUpTables.h"
+#include "DiffDistribution.h"
+
+#define N 6
