@@ -46,19 +46,21 @@ int main(){
 	genDiffTable();
 	genPTableLookUp();
 	clock_t start,end;
-	//printDiffTable();
+	
+	printDiffTable();
 	//printPTableLookUp(7);
-	u64 x;
+	
+	/*u64 x;
 	u8 sb[16];
 	bool bit[64];
 	x=genRandom64();
 	print64(x);
-	word642word8(sb,x);
-	word82word64(&x,sb);
+	word64_2_word4(sb,x);
+	word4_2_word64(&x,sb);
 	print64(x);
 	print64(x);
-	word642bit(bit,x);
-	bit2word64(&x,bit);
+	word64_2_bit(bit,x);
+	bit_2_word64(&x,bit);
 	print64(x);
 	x=permutation(x);
 	print64(x);
@@ -76,6 +78,10 @@ int main(){
 		x=permutation(x);
 	}
 	end=clock();
-	printf("ÆÕÍ¨time=%f\n",(double)(end-start)/CLK_TCK);
+	printf("ÆÕÍ¨time=%f\n",(double)(end-start)/CLK_TCK);*/
+	start=clock();
+	Round_1();
+	end=clock();
+	printf("ËÑË÷time=%f\n",(double)(end-start)/CLK_TCK);
 	system("pause");
 }

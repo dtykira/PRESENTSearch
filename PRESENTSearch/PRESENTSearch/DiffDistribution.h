@@ -1,5 +1,5 @@
 //#pragma once
-
+#include "Types.h"
 void genDiffTable();
 void printDiffTable();
 extern int DDT_int[16][16];

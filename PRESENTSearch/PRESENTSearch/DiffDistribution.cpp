@@ -31,13 +31,15 @@ void genDiffTable(){
 				DDT[i][j]=-2;
 				freq=0;
 			}
-			DDT_SearchInOrderX[freq][DDT_SearchInOrderLength[freq]]=i;
-			DDT_SearchInOrderY[freq][DDT_SearchInOrderLength[freq]]=j;
-			DDT_SearchInOrderLength[freq]++;
-			DDT_SearchInOrderWithFixedX[freq][i][DDT_SearchInOrderWithFixedXLength[freq][i]]=j;
-			DDT_SearchInOrderWithFixedXLength[freq][i]++;
-			DDT_SearchInOrderWithFixedY[freq][j][DDT_SearchInOrderWithFixedYLength[freq][j]]=i;
-			DDT_SearchInOrderWithFixedYLength[freq][j]++;
+			if(temp!=0&&temp!=16){
+				DDT_SearchInOrderX[freq][DDT_SearchInOrderLength[freq]]=i;
+				DDT_SearchInOrderY[freq][DDT_SearchInOrderLength[freq]]=j;
+				DDT_SearchInOrderLength[freq]++;
+				DDT_SearchInOrderWithFixedX[freq][i][DDT_SearchInOrderWithFixedXLength[freq][i]]=j;
+				DDT_SearchInOrderWithFixedXLength[freq][i]++;
+				DDT_SearchInOrderWithFixedY[freq][j][DDT_SearchInOrderWithFixedYLength[freq][j]]=i;
+				DDT_SearchInOrderWithFixedYLength[freq][j]++;
+			}
 		}
 	}
 }
