@@ -80,8 +80,9 @@ int main(){
 	end=clock();
 	printf("ÆÕÍ¨time=%f\n",(double)(end-start)/CLK_TCK);*/
 	start=clock();
-	search(14);
+	//search(13);
 	//Round_1();
+	searchAll();
 	end=clock();
 	printf("ËÑË÷time=%f\n",(double)(end-start)/CLK_TCK);
 	system("pause");

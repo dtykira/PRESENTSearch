@@ -3,4 +3,4 @@
 #include "LookUpTables.h"
 #include "DiffDistribution.h"
 
-#define N 15
+#define N 35
