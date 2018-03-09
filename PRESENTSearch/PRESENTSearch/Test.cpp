@@ -82,7 +82,8 @@ int main(){
 	start=clock();
 	//search(13);
 	//Round_1();
-	searchAll();
+	//searchAll();
+	make(9,-36);
 	end=clock();
 	printf("ËÑË÷time=%f\n",(double)(end-start)/CLK_TCK);
 	system("pause");

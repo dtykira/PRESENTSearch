@@ -4,3 +4,4 @@
 #include "DiffDistribution.h"
 
 #define N 35
+#define PB 10
