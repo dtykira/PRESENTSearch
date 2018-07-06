@@ -79,11 +79,21 @@ int main(){
 	}
 	end=clock();
 	printf("ÆÕÍ¨time=%f\n",(double)(end-start)/CLK_TCK);*/
-	start=clock();
+	//start=clock();
 	//search(13);
 	//Round_1();
-	//searchAll();
-	make(11,-46);
+	searchAll();
+	//make(4,-14);
+	//searchByMaking(4);
+
+	/*rounds=5;
+	B_n_bar=-20;
+	proba[1]=-4;
+	proba[2]=-2;
+	proba[3]=-2;
+	proba[4]=-5;
+	proba[5]=-7;
+	searchPattern();*/
 	end=clock();
 	printf("ËÑË÷time=%f\n",(double)(end-start)/CLK_TCK);
 	system("pause");

@@ -29,6 +29,15 @@ int pr_whole;
 
 bool done=0;
 
+
+int coun=0;
+struct trieNode{
+	int pro;
+	trieNode *son[PB];
+};
+trieNode* root=new trieNode();
+int proba[N+1]={0};
+
 inline void ResetCharacter(int k,int l,int round){
 	for(int i=k+1;i<l;i++){
 		dx[round][i]=0;
@@ -58,9 +67,11 @@ void Round_N_(int j,int pr,int pr_round){
 	if(dx[rounds][j]==0){
 		dy[rounds][j]=0;
 		if(j==16){
-			p[rounds]=pr_round;
-			pr_whole=pr_round+pr;
-			printAndSetBound();
+			if(pr_round==proba[rounds]){
+				p[rounds]=pr_round;
+				pr_whole=pr_round+pr;
+				printAndSetBound();
+			}
 		}else{
 			Round_N_(j+1,pr,pr_round);
 		}
@@ -73,9 +84,12 @@ void Round_N_(int j,int pr,int pr_round){
 				dy[rounds][j]=DDT_SearchInOrderWithFixedX[freq][dx[rounds][j]][index];
 				if(j==16){
 					p[rounds]=prob+pr_round;
-					pr_whole=p[rounds]+pr;
-					printAndSetBound();
+					if(p[rounds]==proba[rounds]){
+						pr_whole=p[rounds]+pr;
+						printAndSetBound();
+					}
 				}else{
+					if((prob+pr_round)<proba[rounds]||(prob+pr_round)==(proba[rounds]+1)) break;
 					Round_N_(j+1,pr,prob+pr_round);
 				}
 			}
@@ -90,8 +104,10 @@ void Round__(int i,int j,int pr,int pr_round){
 	if(dx[i][j]==0){
 		dy[i][j]=0;
 		if(j==16){
-			p[i]=pr_round;
-			Round_(i+1,pr_round+pr);
+			if(pr_round==proba[i]){
+				p[i]=pr_round;
+				Round_(i+1,pr_round+pr);
+			}
 		}else{
 			Round__(i,j+1,pr,pr_round);
 		}
@@ -104,8 +120,11 @@ void Round__(int i,int j,int pr,int pr_round){
 				dy[i][j]=DDT_SearchInOrderWithFixedX[freq][dx[i][j]][index];
 				if(j==16){
 					p[i]=prob+pr_round;
-					Round_(i+1,p[i]+pr);
+					if(p[i]==proba[i]){
+						Round_(i+1,p[i]+pr);
+					}
 				}else{
+					if((prob+pr_round)<proba[i]||(prob+pr_round)==(proba[i]+1)) break;
 					Round__(i,j+1,pr,prob+pr_round);
 				}
 			}
@@ -151,8 +170,11 @@ void Round_1_(int j,int pr_round){
 					dx[1][a[1][j]]=DDT_SearchInOrderWithFixedY[freq][y][index];
 					p[1]=prob+pr_round;
 					ResetCharacter(a[1][j],17,1);
-					Round_(2,p[1]);
+					if(p[1]==proba[1]){
+						Round_(2,p[1]);
+					}
 					if(a[1][j]!=16){
+						if((prob+pr_round)<proba[1]||(prob+pr_round)==(proba[1]+1)) break;
 						Round_1_(j+1,p[1]);
 					}
 				}
@@ -192,14 +214,12 @@ void searchAll(){
 	}
 }
 
-struct trieNode{
-	int pro;
-	trieNode *son[PB];
-};
-trieNode* root=new trieNode();
-int proba[N+1];
-
-//bool searchPattern(){
+void searchPattern(){
+	//errno_t err;
+	//err=fopen_s(&stream,"fprint.txt","w");
+	Round_1_(1,0);
+	//fclose(stream);
+}
 
 void insert(){
 	trieNode *node=root;
@@ -213,6 +233,7 @@ void insert(){
 }
 bool flag=0;
 void makeList(int i,int pr_former){
+	if(done==1) return;
 	for(int p=-2;p>=-1-PB;p--){
 		if((pr_former+p+B[rounds-i])<B_n_bar) break;
 		proba[i]=p;
@@ -240,7 +261,17 @@ void makeList(int i,int pr_former){
 					}
 				}
 				if(flag==0){
-					insert();
+					//insert();
+					//coun++;
+					searchPattern();
+					if(done==1){
+						for(int i=1;i<=rounds;i++){
+							printf("%d ",proba[i]);
+						}
+						printf("\n");
+					}
+					done=0;
+					
 				}
 				break;
 			}
@@ -284,7 +315,7 @@ void trieDepthSearch(){
 	printf("\n");
 }
 
-int coun=0;
+
 void trieSearch(int i,trieNode* thisNode){
 	trieNode* node;
 	for(int j=0;j<PB;j++){
@@ -310,11 +341,22 @@ void make(int r,int b){
 	rounds=r;
 	B_n_bar=b;
 	makeList(1,0);
-	fprintf(stream,"\n");
+	//fprintf(stream,"\n");
 	//trieBreadthSearch();
 	//trieDepthSearch();
-	trieSearch(1,root);
-	printf("%d",coun);
+	//trieSearch(1,root);
+	//printf("%d",coun);
 
 	fclose(stream);
+}
+
+void searchByMaking(int r){
+	rounds=r;
+	int b=B[r-1]+1;
+	B[rounds]=1;
+	do{
+		B_n_bar-=1;
+		make(r,b);
+	}
+	while(done==0);
 }
